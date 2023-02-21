@@ -1,0 +1,53 @@
+http://localhost:4200/
+
+2. In the app.module.ts file, import the RouterModule and Routes modules:
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot([]) // Add this line to import the RouterModule and set up the initial routes
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+3. Define your routes in the Routes array. Each route is an object that maps a URL path to a component
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: '**', component: PageNotFoundComponent } // This is a catch-all route for any other URL
+];
+
+4. Add the routes to the RouterModule by passing the routes array to the forRoot() method
+
+@NgModule({
+  declarations: [AppComponent, HomeComponent, AboutComponent, ContactComponent, PageNotFoundComponent],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes) // Add this line to add the routes to the RouterModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+
+export class AppModule { }
+
+
+5 In your app.component.html file, add a <router-outlet> element to display the component that matches the current URL:
+
+<h1>My App</h1>
+<nav>
+  <a routerLink="/">Home</a>
+  <a routerLink="/about">About</a>
+  <a routerLink="/contact">Contact</a>
+</nav>
+<router-outlet></router-outlet>
